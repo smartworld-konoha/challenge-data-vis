@@ -31,11 +31,18 @@ module.exports = createReactClass({
       	eachData.petalWidth > widthMax && (widthMax = eachData.petalWidth)
       })
 
-    	_this.setState({data: data, lengthMin: lenMin, lengthMax: lenMax, widthMin: widthMin, widthMax: widthMax})
+    	_this.setState({
+        data: data,
+        lengthMin: lenMin,
+        lengthMax: lenMax,
+        widthMin: widthMin,
+        widthMax: widthMax
+      })
     })
   },
   selectItem: function (element){this.setState({selected: element})},
   render (){
+    var selected = this.state.selected
     var divStyle = {
       background: '#222',
       position: 'relative',
@@ -65,10 +72,16 @@ module.exports = createReactClass({
         			position: 'absolute',
         			left: xPos * this.props.width - 5,
         			bottom: yPos * this.props.height - 5,
-        			background: {setosa: '#ff7f0e', virginica: '#1f77b4', versicolor: '#2ca02c'}[eachData.species]
+        			background: {
+              setosa: '#ff7f0e',
+              virginica: '#1f77b4',
+              versicolor: '#2ca02c'
+              }[eachData.species]
         		};
 
-            if ((this.state.selected || {}).id === eachData.id) elementStyle.border = "1px solid white"
+            if ((this.state.selected || {}).id === eachData.id) {
+              elementStyle.border = "1px solid white"
+            }
             var key = Math.random()
 
             return (
@@ -87,7 +100,7 @@ module.exports = createReactClass({
           <table>
             <tbody>
             {
-              (this.state.selected) && Object.keys(this.state.selected).reverse().map( function (eachAttr){
+              (selected) && Object.keys(selected).reverse().map( function (eachAttr){
                 return (
                   <tr key={eachAttr}>
                     <td>{eachAttr}</td>
