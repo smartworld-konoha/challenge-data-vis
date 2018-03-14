@@ -86,12 +86,12 @@ module.exports = createReactClass({
 
               return (
                 <div
-                 key={key}
-                 style={elementStyle}
-                 onMouseEnter={this.selectItem.bind(this, eachData)}
-                 onMouseLeave={this.selectItem.bind(this, null)}
+                  key={key}
+                  style={elementStyle}
+                  onMouseEnter={this.selectItem.bind(this, eachData)}
+                  onMouseLeave={this.selectItem.bind(this, null)}
                 >
-               </div>
+                </div>
               )
             }.bind(this))
           }
