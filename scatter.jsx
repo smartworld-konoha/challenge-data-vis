@@ -90,8 +90,7 @@ module.exports = createReactClass({
                   style={elementStyle}
                   onMouseEnter={this.selectItem.bind(this, eachData)}
                   onMouseLeave={this.selectItem.bind(this, null)}
-                >
-                </div>
+                />
               )
             }.bind(this))
           }
