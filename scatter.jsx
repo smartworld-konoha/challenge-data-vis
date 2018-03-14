@@ -50,15 +50,15 @@ module.exports = createReactClass({
       height: this.props.height,
       border: '1px solid black',
       color: 'rgba(255, 255, 255, 0.7)',
-      boxShadow: '0px 3px 8px rgba(0, 0, 0, 0.5)',
+      boxShadow: '0px 3px 8px rgba(0, 0, 0, 0.5)'
     }
     return (
       <div style={divStyle}>
         <div>
           {
-            this.state.data.map( function (eachData) {
+            this.state.data.map(function (eachData) {
               var withMin = this.state.widthMin
-              var	widthMax = this.state.widthMax
+              var widthMax = this.state.widthMax
               var lengthMin = this.state.lengthMin
               var lengthMax = this.state.lengthMax
               var xPos = linmap(withMin, widthMax, 0, 1, eachData.petalWidth)
@@ -73,9 +73,9 @@ module.exports = createReactClass({
                 left: xPos * this.props.width - 5,
                 bottom: yPos * this.props.height - 5,
                 background: {
-                setosa: '#ff7f0e',
-                virginica: '#1f77b4',
-                versicolor: '#2ca02c'
+                  setosa: '#ff7f0e',
+                  virginica: '#1f77b4',
+                  versicolor: '#2ca02c'
                 }[eachData.species]
               }
 
@@ -86,10 +86,10 @@ module.exports = createReactClass({
 
               return (
                 <div
-                 key = {key }
-                 style = {elementStyle}
-                 onMouseEnter = {this.selectItem.bind(this, eachData)}
-                 onMouseLeave = {this.selectItem.bind(this, null)}
+                 key={key}
+                 style={elementStyle}
+                 onMouseEnter={this.selectItem.bind(this, eachData)}
+                 onMouseLeave={this.selectItem.bind(this, null)}
                 >
                </div>
               )
@@ -100,9 +100,9 @@ module.exports = createReactClass({
           <table>
             <tbody>
               {
-                (selected) && Object.keys(selected).reverse().map( function (eachAttr) {
+                (selected) && Object.keys(selected).reverse().map(function (eachAttr) {
                   return (
-                    <tr key = {eachAttr}>
+                    <tr key={eachAttr}>
                       <td>{eachAttr}</td>
                       <td>{this.state.selected[eachAttr]}</td>
                     </tr>
