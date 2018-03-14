@@ -18,7 +18,7 @@ module.exports = createReactClass({
 
       var lenMin, lenMax, widthMin, widthMax
 
-      data.forEach( function (eachData, index) {
+      data.forEach(function (eachData, index) {
         eachData.id = index
 
         lenMin || (lenMin = eachData.petalLength)
@@ -40,7 +40,7 @@ module.exports = createReactClass({
       })
     })
   },
-  selectItem: function (element) {this.setState({selected: element})},
+  selectItem: function (element) { this.setState({selected: element}) },
   render () {
     var selected = this.state.selected
     var divStyle = {
@@ -55,60 +55,60 @@ module.exports = createReactClass({
     return (
       <div style={divStyle}>
         <div>
-        {
-          this.state.data.map( function (eachData) {
-            var withMin = this.state.widthMin
-            var	widthMax = this.state.widthMax
-            var lengthMin = this.state.lengthMin
-            var lengthMax = this.state.lengthMax
-            var xPos = linmap(withMin, widthMax, 0, 1, eachData.petalWidth)
-            var yPos = linmap(lengthMin, lengthMax, 0, 1, eachData.petalLength)
+          {
+            this.state.data.map( function (eachData) {
+              var withMin = this.state.widthMin
+              var	widthMax = this.state.widthMax
+              var lengthMin = this.state.lengthMin
+              var lengthMax = this.state.lengthMax
+              var xPos = linmap(withMin, widthMax, 0, 1, eachData.petalWidth)
+              var yPos = linmap(lengthMin, lengthMax, 0, 1, eachData.petalLength)
 
-            var elementStyle = {
-              width: 10,
-              height: 10,
-              borderRadius: 5,
-              cursor: 'pointer',
-              position: 'absolute',
-              left: xPos * this.props.width - 5,
-              bottom: yPos * this.props.height - 5,
-              background: {
-              setosa: '#ff7f0e',
-              virginica: '#1f77b4',
-              versicolor: '#2ca02c'
-              }[eachData.species]
-            };
+              var elementStyle = {
+                width: 10,
+                height: 10,
+                borderRadius: 5,
+                cursor: 'pointer',
+                position: 'absolute',
+                left: xPos * this.props.width - 5,
+                bottom: yPos * this.props.height - 5,
+                background: {
+                setosa: '#ff7f0e',
+                virginica: '#1f77b4',
+                versicolor: '#2ca02c'
+                }[eachData.species]
+              }
 
-            if ((this.state.selected || {}).id === eachData.id) {
-              elementStyle.border = '1px solid white'
-            }
-            var key = Math.random()
+              if ((this.state.selected || {}).id === eachData.id) {
+                elementStyle.border = '1px solid white'
+              }
+              var key = Math.random()
 
-            return (
-              <div
-               key = {key }
-               style = {elementStyle}
-               onMouseEnter = {this.selectItem.bind(this, eachData)}
-               onMouseLeave = {this.selectItem.bind(this, null)}
-              >
-             </div>
-            )
-          }.bind(this))
-        }
+              return (
+                <div
+                 key = {key }
+                 style = {elementStyle}
+                 onMouseEnter = {this.selectItem.bind(this, eachData)}
+                 onMouseLeave = {this.selectItem.bind(this, null)}
+                >
+               </div>
+              )
+            }.bind(this))
+          }
         </div>
         <div>
           <table>
             <tbody>
-            {
-              (selected) && Object.keys(selected).reverse().map( function (eachAttr) {
-                return (
-                  <tr key = {eachAttr}>
-                    <td>{eachAttr}</td>
-                    <td>{this.state.selected[eachAttr]}</td>
-                  </tr>
-                )
-              }.bind(this))
-            }
+              {
+                (selected) && Object.keys(selected).reverse().map( function (eachAttr) {
+                  return (
+                    <tr key = {eachAttr}>
+                      <td>{eachAttr}</td>
+                      <td>{this.state.selected[eachAttr]}</td>
+                    </tr>
+                  )
+                }.bind(this))
+              }
             </tbody>
           </table>
         </div>
