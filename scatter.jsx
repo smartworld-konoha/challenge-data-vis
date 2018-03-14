@@ -4,34 +4,34 @@ var jsonist = require('jsonist')
 var createReactClass = require('create-react-class')
 
 module.exports = createReactClass({
-  getInitialState: function (){
+  getInitialState: function () {
     return {
       data: [],
       selected: null
     }
   },
-  componentWillMount: function (){
+  componentWillMount: function () {
     var _this = this
 
-  	jsonist.get(this.props.dataset, function (err, data){
-    	if (err) return console.error(err)
+    jsonist.get(this.props.dataset, function (err, data) {
+      if (err) return console.error(err)
 
-    	var lenMin, lenMax, widthMin, widthMax
+      var lenMin, lenMax, widthMin, widthMax
 
-    	data.forEach( function (eachData, index){
-      	eachData.id = index
+      data.forEach( function (eachData, index) {
+        eachData.id = index
 
         lenMin || (lenMin = eachData.petalLength)
-      	lenMax || (lenMax = eachData.petalLength)
-      	widthMin || (widthMin = eachData.petalWidth)
-      	widthMax || (widthMax = eachData.petalWidth)
-      	eachData.petalLength < lenMin && (lenMin = eachData.petalLength)
-      	eachData.petalLength > lenMax && (lenMax = eachData.petalLength)
-      	eachData.petalWidth < widthMin && (widthMin = eachData.petalWidth)
-      	eachData.petalWidth > widthMax && (widthMax = eachData.petalWidth)
+        lenMax || (lenMax = eachData.petalLength)
+        widthMin || (widthMin = eachData.petalWidth)
+        widthMax || (widthMax = eachData.petalWidth)
+        eachData.petalLength < lenMin && (lenMin = eachData.petalLength)
+        eachData.petalLength > lenMax && (lenMax = eachData.petalLength)
+        eachData.petalWidth < widthMin && (widthMin = eachData.petalWidth)
+        eachData.petalWidth > widthMax && (widthMax = eachData.petalWidth)
       })
 
-    	_this.setState({
+      _this.setState({
         data: data,
         lengthMin: lenMin,
         lengthMax: lenMax,
@@ -40,8 +40,8 @@ module.exports = createReactClass({
       })
     })
   },
-  selectItem: function (element){this.setState({selected: element})},
-  render (){
+  selectItem: function (element) {this.setState({selected: element})},
+  render () {
     var selected = this.state.selected
     var divStyle = {
       background: '#222',
@@ -56,31 +56,31 @@ module.exports = createReactClass({
       <div style={divStyle}>
         <div>
         {
-          this.state.data.map( function (eachData){
+          this.state.data.map( function (eachData) {
             var withMin = this.state.widthMin
-        		var	widthMax = this.state.widthMax
-        		var lengthMin = this.state.lengthMin
-        		var lengthMax = this.state.lengthMax
-        		var xPos = linmap(withMin, widthMax, 0, 1, eachData.petalWidth)
-        		var yPos = linmap(lengthMin, lengthMax, 0, 1, eachData.petalLength)
+            var	widthMax = this.state.widthMax
+            var lengthMin = this.state.lengthMin
+            var lengthMax = this.state.lengthMax
+            var xPos = linmap(withMin, widthMax, 0, 1, eachData.petalWidth)
+            var yPos = linmap(lengthMin, lengthMax, 0, 1, eachData.petalLength)
 
             var elementStyle = {
-        			width: 10,
-        			height: 10,
+              width: 10,
+              height: 10,
               borderRadius: 5,
               cursor: 'pointer',
-        			position: 'absolute',
-        			left: xPos * this.props.width - 5,
-        			bottom: yPos * this.props.height - 5,
-        			background: {
+              position: 'absolute',
+              left: xPos * this.props.width - 5,
+              bottom: yPos * this.props.height - 5,
+              background: {
               setosa: '#ff7f0e',
               virginica: '#1f77b4',
               versicolor: '#2ca02c'
               }[eachData.species]
-        		};
+            };
 
             if ((this.state.selected || {}).id === eachData.id) {
-              elementStyle.border = "1px solid white"
+              elementStyle.border = '1px solid white'
             }
             var key = Math.random()
 
@@ -89,8 +89,8 @@ module.exports = createReactClass({
                key = {key }
                style = {elementStyle}
                onMouseEnter = {this.selectItem.bind(this, eachData)}
-					     onMouseLeave = {this.selectItem.bind(this, null)}
-             >
+               onMouseLeave = {this.selectItem.bind(this, null)}
+              >
              </div>
             )
           }.bind(this))
@@ -100,9 +100,9 @@ module.exports = createReactClass({
           <table>
             <tbody>
             {
-              (selected) && Object.keys(selected).reverse().map( function (eachAttr){
+              (selected) && Object.keys(selected).reverse().map( function (eachAttr) {
                 return (
-                  <tr key={eachAttr}>
+                  <tr key = {eachAttr}>
                     <td>{eachAttr}</td>
                     <td>{this.state.selected[eachAttr]}</td>
                   </tr>
